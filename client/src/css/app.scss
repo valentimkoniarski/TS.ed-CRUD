@@ -1,0 +1,18 @@
+button {
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 150px;
+  i {
+    padding-left: 5px !important;
+  }
+}
+
+.q-card {
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.q-page {
+  margin-top: 100px;
+}
