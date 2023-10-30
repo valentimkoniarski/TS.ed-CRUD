@@ -87,7 +87,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { login } from '../../services/auth/auth.service';
+import { login } from 'src/services/auth/auth.service';
 import { UserLogin } from 'src/models/UserLogin';
 import { useRouter } from 'vue-router';
 import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';

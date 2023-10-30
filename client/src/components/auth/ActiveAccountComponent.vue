@@ -49,6 +49,7 @@ import { ref } from 'vue';
 import { activeAccount, verifyEmail } from 'src/services/auth/auth.service';
 import { Notify } from 'quasar';
 import { useRouter } from 'vue-router';
+import {errorRequestNotificationUtil} from "src/utils/error-request-notification.util";
 
 const showDialog = ref(false);
 const loading = ref(false);
@@ -67,14 +68,7 @@ const sendCodeEmail = () => {
       });
     })
     .catch((error) => {
-      Notify.create({
-        message: 'Error sending code',
-        color: 'negative',
-        position: 'top-right',
-        icon: 'close',
-        timeout: 2000,
-        caption: error.message,
-      });
+      errorRequestNotificationUtil(error);
     })
     .finally(() => {
       loading.value = false;

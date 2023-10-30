@@ -90,7 +90,7 @@ const passwordConfirm = ref('');
 const loading = ref(false);
 const router = useRouter();
 
-const nameRule = (val) => {
+const nameRule = (val: string | any[]) => {
   if (val.length < 6) {
     return 'Name must be at least 6 characters';
   } else if (val.length > 30) {
@@ -99,7 +99,7 @@ const nameRule = (val) => {
   return true;
 };
 
-const usernameRule = (val) => {
+const usernameRule = (val: string) => {
   const emailRegex = /\S+@\S+\.\S+/;
   if (!emailRegex.test(val)) {
     return 'Username must be a valid email address';
@@ -107,7 +107,7 @@ const usernameRule = (val) => {
   return true;
 };
 
-const passwordRule = (val) => {
+const passwordRule = (val: string) => {
   const passwordRegex =
     /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+{}:<>?/.,;[\]-]{6,}$/;
   if (!passwordRegex.test(val)) {
@@ -116,7 +116,7 @@ const passwordRule = (val) => {
   return true;
 };
 
-const passwordConfirmRule = (val) => {
+const passwordConfirmRule = (val: string) => {
   if (val !== password.value) {
     return 'Password must be equal to password confirm';
   }
