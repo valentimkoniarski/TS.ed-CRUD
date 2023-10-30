@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <q-card class="q-card--bordered q-ma-md card-rounded">
+    <q-card class="q-card--bordered q-ma-md ">
       <q-card-section class="q-dialog-card-section-custom">
         <h4>Verify your email adress</h4>
         <p>
