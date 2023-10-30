@@ -1,6 +1,6 @@
 import { Notify } from 'quasar';
 import { removeSpecialCharacters } from 'src/utils/string.utils';
-import { ERROR_NETWORK_REDIRECT } from 'src/services/utils/utils';
+import { ERROR_BAD_REQUEST_REDIRECT, ERROR_NETWORK_REDIRECT } from 'src/services/utils/utils';
 
 export function errorRequestNotificationUtil(error: any) {
   if (error?.response) {
@@ -39,7 +39,13 @@ export function errorRequestNotificationUtil(error: any) {
       color: 'negative',
       icon: 'report_problem',
     });
+  } else if (error.code === 'ERR_BAD_REQUEST') {
+    Notify.create({
+      message: 'Error in request',
+      color: 'negative',
+      icon: 'report_problem',
+    });
+    ERROR_BAD_REQUEST_REDIRECT();
   }
-
   // TODO tratar exception e colocar mais code erros...
 }
