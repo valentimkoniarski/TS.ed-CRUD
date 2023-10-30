@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="login-page" style="padding-top: 100px">
+  <q-layout view="lHh Lpr lFf" class="login-page">
     <q-header elevated class="bg-white">
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" color="dark" />
