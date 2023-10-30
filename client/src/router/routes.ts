@@ -67,7 +67,7 @@ const routes: RouteRecordRaw[] = [
     path: '/homepage',
     component: () => import('layouts/HomeLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/HomePage.vue') },
+      { path: '', component: () => import('pages/home/HomePage.vue') },
       {
         path: 'edit-product/:id',
         name: 'editProduct',
@@ -84,12 +84,12 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('pages/errors-page/ErrorNotFound.vue'),
   },
   {
     path: '/error-network',
     name: 'errorNetwork',
-    component: () => import('pages/ErrorNetwork.vue'),
+    component: () => import('pages/errors-page/ErrorNetwork.vue'),
   },
 ];
 
