@@ -15,7 +15,6 @@
             <div class="row justify-center">
               <div class="col col-xs-6 col-md-6">
                 <q-input
-                  size="sm"
                   v-model="product.name"
                   :rules="[productNameRule]"
                   filled
@@ -26,7 +25,6 @@
               </div>
               <div class="col col-xs-6 col-md-6">
                 <q-input
-                  size="sm"
                   v-model="product.price"
                   :rules="[productPriceRule]"
                   filled
@@ -39,7 +37,6 @@
             <div class="row justify-center">
               <div class="col col-xs-12 col-md-12">
                 <q-input
-                  size="sm"
                   v-model="product.description"
                   :rules="[productDescriptionRule]"
                   filled
