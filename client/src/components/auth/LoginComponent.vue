@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-page>
-      <q-card class="q-card--bordered q-ma-md ">
+      <q-card class="q-card--bordered q-ma-md">
         <q-card-section>
           <div class="q-gutter-md">
             <h2 class="text-h6 q-mb-md">Login</h2>
@@ -43,7 +43,7 @@
                   size="md"
                   glossy
                 >
-                  <q-icon name="login" left/>
+                  <q-icon name="login" left />
                 </q-btn>
 
                 <q-btn
@@ -55,14 +55,14 @@
                   size="md"
                   glossy
                 >
-                  <q-icon name="person_add" left/>
+                  <q-icon name="person_add" left />
                 </q-btn>
               </div>
             </div>
 
             <q-dialog v-model="loading">
-              <q-spinner-gears size="50px" color="primary"/>
-              <q-spinner-facebook v-if="loading"/>
+              <q-spinner-gears size="50px" color="primary" />
+              <q-spinner-facebook v-if="loading" />
             </q-dialog>
           </div>
         </q-card-section>
@@ -76,7 +76,7 @@
               <p>{{ errorMessage }}</p>
             </q-card-section>
             <q-card-actions align="right">
-              <q-btn color="primary" label="OK" @click="errorDialog = false"/>
+              <q-btn color="primary" label="OK" @click="errorDialog = false" />
             </q-card-actions>
           </q-card>
         </q-dialog>
@@ -86,11 +86,11 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
-import {login} from '../../services/auth/auth.service';
-import {UserLogin} from 'src/models/UserLogin';
-import {useRouter} from 'vue-router';
-import {errorRequestNotificationUtil} from 'src/utils/error-request-notification.util';
+import { ref } from 'vue';
+import { login } from '../../services/auth/auth.service';
+import { UserLogin } from 'src/models/UserLogin';
+import { useRouter } from 'vue-router';
+import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';
 
 const username = ref('');
 const password = ref('');
@@ -138,7 +138,7 @@ const submitLogin = () => {
       if (isValidateUser) {
         redirectToHomePage();
       } else {
-        router.push({name: 'validateUser'});
+        router.push({ name: 'validateUser' });
       }
     })
     .catch((error) => {
@@ -159,12 +159,10 @@ const redirectToHomePage = () => {
 </script>
 
 <style scoped>
-
 .btn-actions-container {
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
   }
 }
-
 </style>

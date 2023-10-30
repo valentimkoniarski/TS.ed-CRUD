@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <q-card class="q-card--bordered q-ma-md ">
+    <q-card class="q-card--bordered q-ma-md">
       <div class="q-pa-md q-gutter-sm">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="Homepage" icon="widgets" to="/homepage" />
@@ -79,7 +79,7 @@ import { createProduct } from 'src/services/product/product.service';
 import { Product } from 'src/models/Product';
 import { Notify, useQuasar } from 'quasar';
 import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';
-import {useRouter} from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 

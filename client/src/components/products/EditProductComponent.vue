@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <q-card class="q-card--bordered q-ma-md ">
+    <q-card class="q-card--bordered q-ma-md">
       <div class="q-pa-md q-gutter-sm">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="Homepage" icon="widgets" to="/homepage" />

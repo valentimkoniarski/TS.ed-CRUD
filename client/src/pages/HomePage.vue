@@ -7,7 +7,6 @@
         </q-btn>
       </div>
 
-      <!-- SENAO HOUVER PRODUTOS EXIBE UMA PAGINA NO DATA -->
       <div v-if="!hasProducts()" class="row justify-center">
         <div class="col col-xs-12 col-md-12">
           <q-card>
@@ -62,7 +61,9 @@
           <q-card-section>
             <q-item v-for="column in columns" :key="column.name">
               <q-item-section>
-                <q-item-label v-show="column.label !== 'Action'">{{ column.label }}</q-item-label>
+                <q-item-label v-show="column.label !== 'Action'">{{
+                  column.label
+                }}</q-item-label>
               </q-item-section>
               <q-item-section side>
                 {{ row[column.name] }}
@@ -91,7 +92,7 @@
 </template>
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
-import {format, useQuasar} from 'quasar';
+import { format, useQuasar } from 'quasar';
 import { findAllProducts } from 'src/services/product/product.service';
 import { Product } from 'src/models/Product';
 import { useRouter } from 'vue-router';
@@ -106,11 +107,11 @@ const products = ref<Product[]>([]);
 
 const hasProducts = () => {
   return products.value.length > 0;
-}
+};
 
 const pagination = ref({
   page: 1,
-  rowsPerPage: 5
+  rowsPerPage: 5,
 });
 
 const updatePagination = (newPagination: any) => {

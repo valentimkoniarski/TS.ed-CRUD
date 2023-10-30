@@ -1,6 +1,9 @@
 import { Notify } from 'quasar';
 import { removeSpecialCharacters } from 'src/utils/string.utils';
-import { ERROR_BAD_REQUEST_REDIRECT, ERROR_NETWORK_REDIRECT } from 'src/services/utils/utils';
+import {
+  ERROR_BAD_REQUEST_REDIRECT,
+  ERROR_NETWORK_REDIRECT,
+} from 'src/services/utils/utils';
 
 export function errorRequestNotificationUtil(error: any) {
   if (error?.response) {

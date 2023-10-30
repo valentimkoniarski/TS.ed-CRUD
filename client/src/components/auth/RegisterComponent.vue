@@ -53,7 +53,7 @@
                   size="md"
                   glossy
                 >
-                  <q-icon name="login" left/>
+                  <q-icon name="login" left />
                 </q-btn>
                 <q-btn
                   color="secondary"
@@ -64,7 +64,7 @@
                   size="md"
                   glossy
                 >
-                  <q-icon name="login" left/>
+                  <q-icon name="login" left />
                 </q-btn>
               </div>
             </div>
@@ -76,12 +76,12 @@
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue';
-import {register} from '../../services/auth/auth.service';
-import {UserRegister} from 'src/models/UserRegister';
-import {useRouter} from 'vue-router';
-import {Notify} from 'quasar';
-import {errorRequestNotificationUtil} from 'src/utils/error-request-notification.util';
+import { ref } from 'vue';
+import { register } from '../../services/auth/auth.service';
+import { UserRegister } from 'src/models/UserRegister';
+import { useRouter } from 'vue-router';
+import { Notify } from 'quasar';
+import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';
 
 const name = ref('');
 const username = ref('');
@@ -134,7 +134,7 @@ const isFormValid = () => {
 
 const redirectToLogin = () => {
   router.push('/login');
-}
+};
 
 const registerUser = async () => {
   loading.value = true;
@@ -169,5 +169,4 @@ const registerUser = async () => {
     flex-direction: column;
   }
 }
-
 </style>
