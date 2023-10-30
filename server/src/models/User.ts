@@ -1,5 +1,5 @@
 import {Model, ObjectID, Unique} from "@tsed/mongoose";
-import {Email, Groups, MaxLength, MinLength, Pattern, Property, Required} from "@tsed/schema";
+import {Email, Groups, Hidden, MaxLength, MinLength, Pattern, Property, Required} from "@tsed/schema";
 import * as bcrypt from "bcrypt";
 import {InvalidCredentialsException} from "../exceptions/UserException";
 
@@ -26,6 +26,7 @@ export class User {
   @Email()
   username: string;
 
+  @Hidden()
   @Property()
   @Required()
   @MinLength(6)
