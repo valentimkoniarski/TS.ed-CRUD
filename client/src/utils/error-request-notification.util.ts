@@ -6,6 +6,11 @@ import {
 } from 'src/services/utils/utils';
 
 export function errorRequestNotificationUtil(error: any) {
+  listFieldErrors(error);
+  listGeneralErrors(error);
+}
+
+function listFieldErrors(error: any) {
   if (error?.response) {
     const fieldErrors = error?.response?.data?.errors[0];
 
@@ -28,7 +33,9 @@ export function errorRequestNotificationUtil(error: any) {
       });
     }
   }
+}
 
+function listGeneralErrors(error: any) {
   if (error.code === 'ERR_NETWORK') {
     Notify.create({
       message: error?.message,
