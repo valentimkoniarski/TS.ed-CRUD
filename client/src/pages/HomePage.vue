@@ -41,7 +41,7 @@
           <q-card-section>
             <q-item v-for="column in columns" :key="column.name">
               <q-item-section>
-                <q-item-label>{{ column.label }}</q-item-label>
+                <q-item-label v-show="column.label !== 'Action'">{{ column.label }}</q-item-label>
               </q-item-section>
               <q-item-section side>
                 {{ row[column.name] }}
@@ -49,7 +49,7 @@
             </q-item>
           </q-card-section>
 
-          <q-card-actions align="right">
+          <q-card-actions align="center">
             <q-btn icon="edit" size="sm" @click="updateProductView(row?.id)" />
             <DeleteProductComponent
               :product-id="row?.id"
@@ -57,7 +57,9 @@
             />
           </q-card-actions>
         </q-card>
-<!--        <q-pagination v-model="paginationCard" :max="total" />-->
+        <!--
+        <q-pagination v-model="paginationCard" :max="total" />
+        -->
       </template>
     </div>
 
