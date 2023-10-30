@@ -141,6 +141,10 @@ const isFormValid = () => {
   );
 };
 
+const redirectToHomePage = () => {
+  router.push('/homepage');
+};
+
 const editProduct = () => {
   loading.value = true;
   updateProduct(productId, product.value)
@@ -157,6 +161,7 @@ const editProduct = () => {
     })
     .finally(() => {
       loading.value = false;
+      redirectToHomePage();
     });
 };
 

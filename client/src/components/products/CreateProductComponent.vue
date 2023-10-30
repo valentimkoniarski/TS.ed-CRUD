@@ -82,6 +82,9 @@ import { createProduct } from 'src/services/product/product.service';
 import { Product } from 'src/models/Product';
 import { Notify, useQuasar } from 'quasar';
 import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
 
 const product = ref<Product>({
   name: '',
@@ -134,6 +137,10 @@ const isFormValid = () => {
   );
 };
 
+const redirectToHomePage = () => {
+  router.push('/homepage');
+};
+
 const addProduct = () => {
   loading.value = true;
   createProduct(product.value)
@@ -149,6 +156,7 @@ const addProduct = () => {
       errorRequestNotificationUtil(error);
     })
     .finally(() => {
+      redirectToHomePage();
       loading.value = false;
     });
 };
