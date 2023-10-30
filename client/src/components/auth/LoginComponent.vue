@@ -161,7 +161,7 @@ const redirectToHomePage = () => {
 <style scoped>
 
 .btn-actions-container {
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
   }
