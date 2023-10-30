@@ -7,7 +7,28 @@
         </q-btn>
       </div>
 
-      <template v-if="isDesktop">
+      <!-- SENAO HOUVER PRODUTOS EXIBE UMA PAGINA NO DATA -->
+      <div v-if="!hasProducts()" class="row justify-center">
+        <div class="col col-xs-12 col-md-12">
+          <q-card>
+            <q-card-section>
+              <div class="row justify-center">
+                <div class="col col-xs-12 col-md-12">
+                  <q-item>
+                    <q-item-section>
+                      <q-item-label class="text-h6">
+                        No products found
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </div>
+              </div>
+            </q-card-section>
+          </q-card>
+        </div>
+      </div>
+
+      <template v-if="isDesktop && hasProducts()">
         <q-table
           :rows="products"
           :columns="columns"
@@ -83,6 +104,10 @@ const $q = useQuasar();
 const loading = ref(false);
 const products = ref<Product[]>([]);
 
+const hasProducts = () => {
+  return products.value.length > 0;
+}
+
 const pagination = ref({
   page: 1,
   rowsPerPage: 5
@@ -101,7 +126,6 @@ const refresh = () => {
 
   findAllProducts(pagination.value.page, pagination.value.rowsPerPage)
     .then((response) => {
-      console.log(response);
       products.value = response.data.results;
     })
     .catch((error) => {
