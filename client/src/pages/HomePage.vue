@@ -2,7 +2,7 @@
   <q-page>
     <div class="q-pa-md">
       <div class="row btn-add">
-        <q-btn @click="createProductView" color="primary" label="Add product">
+        <q-btn @click="createProductView()" color="primary" label="Add product">
           <q-icon name="add" left />
         </q-btn>
       </div>
@@ -32,8 +32,7 @@
           :rows="products"
           :columns="columns"
           row-key="id"
-          :pagination="pagination"
-          @update:pagination="updatePagination"
+          :hidePagination="true"
         >
           <template v-slot:body-cell-action="props">
             <q-td
@@ -56,7 +55,7 @@
         </q-table>
       </template>
 
-      <template v-else>
+      <template v-else-if="hasProducts()">
         <q-card v-for="row in products" :key="row.id" class="q-mb-md">
           <q-card-section>
             <q-item v-for="column in columns" :key="column.name">
@@ -79,11 +78,10 @@
             />
           </q-card-actions>
         </q-card>
-        <!--
-        <q-pagination v-model="paginationCard" :max="total" />
-        -->
       </template>
     </div>
+
+    <q-pagination color="white text-dark" text-color="dark" v-model="nextPage" :max="maxPages()" />
 
     <q-dialog v-model="loading">
       <q-spinner-gears size="50px" color="primary" />
@@ -112,15 +110,19 @@ const hasProducts = () => {
 const pagination = ref({
   page: 1,
   rowsPerPage: 5,
+  rowsNumber: 0,
 });
 
-const updatePagination = (newPagination: any) => {
-  pagination.value = newPagination;
-};
+const nextPage = ref(0)
 
-watch(pagination, (newPagination) => {
+watch(nextPage, (newPagination) => {
+  pagination.value.page = newPagination;
   refresh();
 });
+
+const maxPages = () => {
+  return Math.ceil(pagination.value.rowsNumber / pagination.value.rowsPerPage);
+}
 
 const refresh = () => {
   loading.value = true;
@@ -128,6 +130,7 @@ const refresh = () => {
   findAllProducts(pagination.value.page, pagination.value.rowsPerPage)
     .then((response) => {
       products.value = response.data.results;
+      pagination.value.rowsNumber = response.data.total;
     })
     .catch((error) => {
       errorRequestNotificationUtil(error);
