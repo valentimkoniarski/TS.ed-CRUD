@@ -116,8 +116,10 @@ const pagination = ref({
 const nextPage = ref(0)
 
 watch(nextPage, (newPagination) => {
-  pagination.value.page = newPagination;
-  refresh();
+  if (newPagination !== pagination.value.page) {
+    pagination.value.page = newPagination;
+    refresh();
+  }
 });
 
 const maxPages = () => {
