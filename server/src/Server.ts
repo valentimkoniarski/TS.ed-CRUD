@@ -6,12 +6,12 @@ import {config} from "./config";
 import * as rest from "./controllers/rest";
 import "./protols";
 import * as bodyParser from "body-parser";
-import cookieParser from 'cookie-parser';
+import cookieParser from "cookie-parser";
 import session from "express-session";
 import methodOverride from "method-override";
 import passport from "passport";
 import * as process from "process";
-require('dotenv').config();
+require("dotenv").config();
 
 @Configuration({
   ...config,
@@ -29,8 +29,8 @@ require('dotenv').config();
     "cookie-parser",
     "compression",
     "method-override",
-    'json-parser',
-    {use: 'urlencoded-parser', options: {extended: true}},
+    "json-parser",
+    {use: "urlencoded-parser", options: {extended: true}},
   ],
   mongoose: [
     {

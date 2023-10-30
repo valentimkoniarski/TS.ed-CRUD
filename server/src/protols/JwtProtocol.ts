@@ -25,12 +25,13 @@ export class JwtProtocol implements OnVerify {
       throw new Unauthorized("Wrong token");
     }
 
-    const isUserWithoutValidation = !req.path.includes("/rest/auth") && !user.isValidate
+    const isUserWithoutValidation = !req.path.includes("/rest/auth") && !user.isValidate;
     if (isUserWithoutValidation) {
       throw new Unauthorized("User not validated");
     }
 
     req.user = user;
+
     return user;
   }
 }

@@ -26,6 +26,7 @@ export class ProductService implements CrudImpl {
     if (!product) {
       throw new NotFound("Product not found");
     }
+
     return this.productModel.findById(id).exec();
   }
 
@@ -33,6 +34,7 @@ export class ProductService implements CrudImpl {
     const userLogged = await this.userService.getUserLogged(req);
     productData.User = userLogged;
     const product = new this.productModel(productData);
+
     return await product.save();
   }
 

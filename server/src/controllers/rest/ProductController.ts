@@ -10,7 +10,7 @@ import {Page} from "../../utils/Page";
 export class ProductController {
 
   @Inject()
-  private productService: ProductService
+  private productService: ProductService;
 
   @Post("/")
   @Authenticate("jwt")

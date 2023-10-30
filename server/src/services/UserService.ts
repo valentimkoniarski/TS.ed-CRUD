@@ -2,15 +2,15 @@ import {Req, Service} from "@tsed/common";
 import {Model} from "mongoose";
 import {Inject} from "@tsed/di";
 import {User} from "../models/User";
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {InvalidTokenException} from "../exceptions/UserException";
 import {NotFound} from "@tsed/exceptions";
 import * as nodemailer from "nodemailer";
 import {ActivationToken} from "../models/ActivationToken";
-import {v4 as uuidv4} from 'uuid';
+import {v4 as uuidv4} from "uuid";
 import * as process from "process";
-require('dotenv').config();
+require("dotenv").config();
 
 @Service()
 export class UserService {
@@ -34,11 +34,13 @@ export class UserService {
     const SALTROUNDS = 10;
     const salt = await bcrypt.genSalt(SALTROUNDS);
     newUser.password = await bcrypt.hash(newUser.password, salt);
+
     return this.userModel.create(newUser);
   }
 
   async isValidToken(req: Req) {
     const userLogged = await this.getUserLogged(req);
+
     return !!userLogged;
   }
 
@@ -51,6 +53,7 @@ export class UserService {
     if (!user) {
       throw new NotFound("User not found");
     }
+
     return user;
   }
 
@@ -76,6 +79,7 @@ export class UserService {
     if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {
       throw new InvalidTokenException();
     }
+
     return authorizationHeader.slice(7);
   }
 
@@ -96,9 +100,9 @@ export class UserService {
     const activationToken = await this.activationTokenModel.create({User: userLogged, token: uuidv4()});
 
     const mailOptions = {
-      from: 'crud.ts.ed.valentim@outlook.com',
+      from: "crud.ts.ed.valentim@outlook.com",
       to: userLogged.username,
-      subject: 'Ativação da conta TS.ed-CRUD',
+      subject: "Ativação da conta TS.ed-CRUD",
       text: `Código de ativação da conta ${activationToken.token}`,
     };
 
@@ -106,7 +110,7 @@ export class UserService {
       if (error) {
         console.error(error);
       } else {
-        console.log('E-mail enviado: ' + info.response);
+        console.log("E-mail enviado: " + info.response);
       }
     });
   }

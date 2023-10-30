@@ -19,6 +19,6 @@ if (isProduction) {
   });
 }
 
-export default <PlatformLoggerSettings> {
+export default {
   disableRoutesSummary: isProduction
-};
+} as PlatformLoggerSettings;

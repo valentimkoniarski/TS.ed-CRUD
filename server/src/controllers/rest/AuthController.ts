@@ -5,7 +5,7 @@ import {User} from "../../models/User";
 import {Returns, Security} from "@tsed/schema";
 import {InvalidTokenException, UserAlreadyExistsException} from "../../exceptions/UserException";
 import {BadRequest} from "@tsed/exceptions";
-import { MongoError } from 'mongodb';
+import { MongoError } from "mongodb";
 
 @Controller("/auth")
 @Scope(ProviderScope.SINGLETON)

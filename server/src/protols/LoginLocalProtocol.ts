@@ -22,7 +22,7 @@ export class LocalProtocol implements OnVerify {
   @Constant("passport.protocols.jwt.settings")
   jwtSettings: any;
 
-  async $onVerify(@Req() request: Req, @BodyParams() @Groups('credentials') credentials: User) {
+  async $onVerify(@Req() request: Req, @BodyParams() @Groups("credentials") credentials: User) {
     const {username, password} = credentials;
     const user = await this.usersService.findOne({username});
 
@@ -36,6 +36,7 @@ export class LocalProtocol implements OnVerify {
 
     const token = this.createJwt(user);
     this.usersService.attachToken(user, token);
+
     return user;
   }
 
