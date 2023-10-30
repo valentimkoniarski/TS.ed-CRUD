@@ -3,7 +3,6 @@ import axios from '../../interceptor/interceptor';
 import { API_URL } from '../utils/utils';
 import { UserRegister } from 'src/models/UserRegister';
 import { UserLogin } from 'src/models/UserLogin';
-import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';
 
 export function login(user: UserLogin) {
   return axios.post(API_URL + 'auth/login', user);
