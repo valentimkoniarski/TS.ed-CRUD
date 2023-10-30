@@ -41,18 +41,33 @@
               dense
               type="password"
             />
-            <q-btn
-              color="primary"
-              label="register"
-              @click="registerUser"
-              :disable="!isFormValid()"
-              class="q-ma-md custom-button"
-              rounded
-              size="md"
-              glossy
-            >
-              <q-icon name="login" left />
-            </q-btn>
+            <div class="row">
+              <div class="col-12 btn-actions-container">
+                <q-btn
+                  color="primary"
+                  label="register"
+                  @click="registerUser"
+                  :disable="!isFormValid()"
+                  class="q-ma-md custom-button"
+                  rounded
+                  size="md"
+                  glossy
+                >
+                  <q-icon name="login" left/>
+                </q-btn>
+                <q-btn
+                  color="secondary"
+                  label="redirect to login"
+                  @click="redirectToLogin"
+                  class="q-ma-md"
+                  rounded
+                  size="md"
+                  glossy
+                >
+                  <q-icon name="login" left/>
+                </q-btn>
+              </div>
+            </div>
           </div>
         </q-card-section>
       </q-card>
@@ -61,12 +76,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { register } from '../../services/auth/auth.service';
-import { UserRegister } from 'src/models/UserRegister';
-import { useRouter } from 'vue-router';
-import { Notify } from 'quasar';
-import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';
+import {ref} from 'vue';
+import {register} from '../../services/auth/auth.service';
+import {UserRegister} from 'src/models/UserRegister';
+import {useRouter} from 'vue-router';
+import {Notify} from 'quasar';
+import {errorRequestNotificationUtil} from 'src/utils/error-request-notification.util';
 
 const name = ref('');
 const username = ref('');
@@ -117,6 +132,10 @@ const isFormValid = () => {
   );
 };
 
+const redirectToLogin = () => {
+  router.push('/login');
+}
+
 const registerUser = async () => {
   loading.value = true;
   const user: UserRegister = {
@@ -143,4 +162,12 @@ const registerUser = async () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn-actions-container {
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+</style>
