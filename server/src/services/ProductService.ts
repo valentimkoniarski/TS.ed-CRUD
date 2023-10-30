@@ -58,12 +58,14 @@ export class ProductService implements CrudImpl {
     const userLogged = await this.userService.getUserLogged(req);
     const skip = (page - 1) * limit;
 
-    const items = await this.productModel.find({User: userLogged._id})
+    const items = await this.productModel
+      .find({ User: userLogged._id })
+      .sort({ _id: -1 })
       .skip(skip)
       .limit(limit)
       .exec();
 
-    const totalItems = await this.productModel.countDocuments().exec();
+    const totalItems = await this.productModel.countDocuments({ User: userLogged._id }).exec();
     const totalPages = Math.ceil(totalItems / limit);
 
     const pageResult: Page<Product> = new Page<Product>({

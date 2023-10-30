@@ -26,7 +26,7 @@ export class ProductController {
   @Returns(200, Product).Groups("info")
   async findAllPaginated(@Req() req: Req,
                          @QueryParams("page") page: number = 1,
-                         @QueryParams("limit") limit: number = 10): Promise<Page<Product>> {
+                         @QueryParams("limit") limit: number = 5): Promise<Page<Product>> {
     return await this.productService.findAllPaginated(req, page, limit);
   }
 
