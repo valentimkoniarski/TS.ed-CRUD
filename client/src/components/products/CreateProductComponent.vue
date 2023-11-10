@@ -105,6 +105,7 @@ const productNameRule = (val: string) => {
     }
     return 'Name invalid';
   }
+  return true;
 };
 
 const productPriceRule = (val: string) => {
@@ -115,6 +116,7 @@ const productPriceRule = (val: string) => {
     }
     return 'Price invalid';
   }
+  return true;
 };
 
 const productDescriptionRule = (val: string) => {
@@ -124,6 +126,7 @@ const productDescriptionRule = (val: string) => {
     }
     return 'Description invalid';
   }
+  return true;
 };
 
 const isFormValid = () => {

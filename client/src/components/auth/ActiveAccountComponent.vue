@@ -49,7 +49,7 @@ import { ref } from 'vue';
 import { activeAccount, verifyEmail } from 'src/services/auth/auth.service';
 import { Notify } from 'quasar';
 import { useRouter } from 'vue-router';
-import {errorRequestNotificationUtil} from "src/utils/error-request-notification.util";
+import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util'
 
 const showDialog = ref(false);
 const loading = ref(false);
