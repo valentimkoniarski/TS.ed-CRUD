@@ -4,13 +4,13 @@
       <div class="q-pa-md q-gutter-sm">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="Homepage" icon="widgets" to="/homepage" />
-          <q-breadcrumbs-el label="Edit Product" />
+          <q-breadcrumbs-el label="Create Product" />
         </q-breadcrumbs>
       </div>
 
       <q-card-section>
         <div class="q-gutter-md">
-          <h2 class="text-h6 q-mb-md">Edit Product</h2>
+          <h2 class="text-h6 q-mb-md">Create Product</h2>
           <div class="q-pa-md example-row-variable-width">
             <div class="row justify-center">
               <div class="col col-xs-6 col-md-6">
@@ -52,7 +52,7 @@
                 color="primary"
                 label="Save"
                 @click="addProduct()"
-                :disable="!isFormValid()"
+                :disabled="isFormInvalid"
                 class="q-ma-md custom-button"
                 rounded
                 size="lg"
@@ -74,12 +74,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { createProduct } from 'src/services/product/product.service';
 import { Product } from 'src/models/Product';
-import { Notify, useQuasar } from 'quasar';
+import { Notify } from 'quasar';
 import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';
 import { useRouter } from 'vue-router';
+import { useProductValidation } from './useProductValidation';
 
 const router = useRouter();
 
@@ -91,51 +92,12 @@ const product = ref<Product>({
 
 const loading = ref(false);
 
-const $q = useQuasar();
-
-const isDesktop = computed(() => {
-  return !$q.screen.lt.md;
-});
-
-const productNameRule = (val: string) => {
-  const nameRegex = /^[a-zA-Z0-9 ]{2,20}$/;
-  if (!nameRegex.test(val)) {
-    if (isDesktop.value) {
-      return 'Name must be between 2 and 20 characters long and contain only letters and numbers';
-    }
-    return 'Name invalid';
-  }
-  return true;
-};
-
-const productPriceRule = (val: string) => {
-  const priceRegex = /^\d+(\.\d{1,2})?$/;
-  if (!priceRegex.test(val)) {
-    if (isDesktop.value) {
-      return 'Price must be a number with two decimal places';
-    }
-    return 'Price invalid';
-  }
-  return true;
-};
-
-const productDescriptionRule = (val: string) => {
-  if (val.length < 6 || val.length > 40) {
-    if (isDesktop.value) {
-      return 'Description must be between 6 and 40 characters long';
-    }
-    return 'Description invalid';
-  }
-  return true;
-};
-
-const isFormValid = () => {
-  return (
-    productNameRule(product.value.name) === undefined &&
-    productPriceRule(product.value.price.toString()) === undefined &&
-    productDescriptionRule(product.value.description) === undefined
-  );
-};
+const {
+  productNameRule,
+  productPriceRule,
+  productDescriptionRule,
+  isFormInvalid
+} = useProductValidation(product.value);
 
 const redirectToHomePage = () => {
   router.push('/homepage');

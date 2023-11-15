@@ -54,7 +54,7 @@
                 color="primary"
                 label="Save"
                 @click="editProduct()"
-                :disable="!isFormValid()"
+                :disable="isFormInvalid"
                 class="q-ma-md custom-button"
                 rounded
                 size="lg"
@@ -76,70 +76,28 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref } from 'vue';
 import {
   updateProduct,
   findProductById,
 } from 'src/services/product/product.service';
 import { useRouter } from 'vue-router';
 import { Product } from 'src/models/Product';
-import { Notify, useQuasar } from 'quasar';
+import { Notify } from 'quasar';
 import { errorRequestNotificationUtil } from 'src/utils/error-request-notification.util';
-
-const $q = useQuasar();
+import { useProductValidation } from './useProductValidation';
 
 const product = ref<Product>({
   name: '',
   price: 0,
-  description: '',
+  description: ''
 });
+
 const loading = ref(false);
 const router = useRouter();
 const productId = router.currentRoute.value.params.id;
 
-const isDesktop = computed(() => {
-  return !$q.screen.lt.md;
-});
-
-const productNameRule = (val: string) => {
-  const nameRegex = /^[a-zA-Z0-9 ]{2,20}$/;
-  if (!nameRegex.test(val)) {
-    if (isDesktop.value) {
-      return 'Name must be between 2 and 20 characters long and contain only letters and numbers';
-    }
-    return 'Name invalid';
-  }
-  return true;
-};
-
-const productPriceRule = (val: string) => {
-  const priceRegex = /^\d+(\.\d{1,2})?$/;
-  if (!priceRegex.test(val)) {
-    if (isDesktop.value) {
-      return 'Price must be a number with two decimal places';
-    }
-    return 'Price invalid';
-  }
-  return true;
-};
-
-const productDescriptionRule = (val: string) => {
-  if (val.length < 6 || val.length > 40) {
-    if (isDesktop.value) {
-      return 'Description must be between 6 and 40 characters long';
-    }
-    return 'Description invalid';
-  }
-  return true;
-};
-
-const isFormValid = () => {
-  return (
-    productNameRule(product.value.name) === undefined &&
-    productPriceRule(product.value.price.toString()) === undefined &&
-    productDescriptionRule(product.value.description) === undefined
-  );
-};
+const { productNameRule, productPriceRule, productDescriptionRule, isFormInvalid } = useProductValidation(product.value);
 
 const redirectToHomePage = () => {
   router.push('/homepage');
@@ -170,7 +128,9 @@ onMounted(() => {
 
   findProductById(productId)
     .then((response) => {
-      product.value = response.data;
+      product.value.name = response.data.name;
+      product.value.price = response.data.price;
+      product.value.description = response.data.description;
     })
     .catch((error) => {
       errorRequestNotificationUtil(error);
